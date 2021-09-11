@@ -16,6 +16,13 @@ authRouter.post('/signup/admin', async (req, res, next) => {
     try {
 
         const obj = req.body;
+
+        const userData = await userInstCollection.get();
+        if (userData) {
+            userData.map(e => {
+                if (obj.email === e.email) next('Email is already exist')
+            })
+        }
         const newRecord = await adminInstCollection.create(obj);
         res.status(201).json(newRecord);
     } catch (error) {
@@ -28,6 +35,13 @@ authRouter.post('/signup/user', async (req, res, next) => {
     try {
 
         const obj = req.body;
+        const adminData = await adminInstCollection.get();
+        if (adminData) {
+            adminData.map(e => {
+                if (obj.email === e.email) next('Email is already exist')
+            })
+        }
+
         const newRecord = await userInstCollection.create(obj);
         res.status(201).json(newRecord);
     } catch (error) {

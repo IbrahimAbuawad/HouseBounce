@@ -2,7 +2,8 @@ import React, { useEffect, useContext } from "react";
 import { Auth } from "../../context/AuthContext";
 import { Prop } from "../../context/PropContext";
 import RenderCards from "../rendercards/RenderCards";
-import CardGroup from "react-bootstrap/CardGroup";
+import MyChart from "../chart/MyChart";
+
 import "./home.css";
 
 function Home({ logged }) {
@@ -20,11 +21,19 @@ function Home({ logged }) {
   }, [AuthObject]);
 
   if (logged) {
-    if (PropObject.renderData) {
+    if (PropObject?.renderData?.length>0) {
       return (
-        <div className="cardGroup">
-          <RenderCards renderData={PropObject.renderData} />
-        </div>
+        <>
+          <div className="cardGroup">
+            <RenderCards renderData={PropObject.renderData} />
+          </div>
+
+          {AuthObject.role === "admin" && (
+            <div class='boss'>
+              <MyChart />
+            </div>
+          )}
+        </>
       );
     } else {
       return (

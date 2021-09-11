@@ -22,24 +22,25 @@ function App() {
       <Header logged={AuthObject.loggedIn} />
       <Switch>
 
-        <Route path='/s'>
+        <Route exact path='/'>
           <Home logged={AuthObject.loggedIn} />
         </Route>
 
-        <Route path='/signup'>
+        <Route exact path='/signup'>
           <Signup logged={AuthObject.loggedIn} />
         </Route>
 
-        <Route path='/addproperty'>
+        <Route exact path='/addproperty'>
           <AddProp />
         </Route>
-        <Route path='/signin'>
+
+        <Route exact path='/signin'>
 
           <Signin logged={AuthObject.loggedIn} />
         </Route>
 
 
-        <Route path='*' >
+        <Route exact path='*' >
           <NotFound />
         </Route>
 

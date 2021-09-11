@@ -2,8 +2,7 @@ import React, { useContext, useState } from "react";
 import Form from "react-bootstrap/Form";
 import signinLogo from "../../assets/114.png";
 import { Auth } from "../../context/AuthContext";
-import { Redirect } from "react-router";
-import { Link } from "react-router-dom";
+import { Link,Redirect } from "react-router-dom";
 import "./signup.css";
 function Signup({ logged }) {
   const [userInfo, setUserInfo] = useState({

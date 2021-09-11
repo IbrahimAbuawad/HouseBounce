@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import axios from 'axios';
 import { Auth } from "./AuthContext";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-import { Redirect } from "react-router";
 
 export const Prop = React.createContext();
 
 function PropContext(props) {
-const [renderData, setRenderData] = useState([])
+    const [renderData, setRenderData] = useState([])
 
     let history = useHistory();
     const AuthObject = useContext(Auth);
@@ -36,7 +35,7 @@ const [renderData, setRenderData] = useState([])
 
                 let data = await axios.post(`${host}/addprop`, obj, config);
                 console.log(data, 'added');
-                history.push('/s');
+                history.push('/');
 
             }
 
@@ -46,9 +45,7 @@ const [renderData, setRenderData] = useState([])
         }
     }
 
-    // router.post('/addprop', bearerAuth.forUsers, permissions('create'), addProperty);
-    // router.get('/getpropforusers/:userId', bearerAuth.forUsers, permissions('read'), getForUsers);
-    // router.get('/getpropforadmins', bearerAuth.forAdmin, permissions('read'), getForAdmins);
+
     // router.put('/changeStatus/:propId', bearerAuth.forAdmin, permissions('update'), updateStatus);
 
 
@@ -75,7 +72,51 @@ const [renderData, setRenderData] = useState([])
 
                 let data = await axios.get(`${host}/getpropforadmins`, config);
                 console.log(data, 'adminDataProp');
-                setRenderData(data.data)
+                setRenderData(data?.data);
+
+            }
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function changeStatusApprove(_id) {
+        try {
+            if (AuthObject.role === 'admin') {
+
+                let obj = {
+                    reqStatus: 'approved'
+                }
+
+                let updatedData = await axios.put(`${host}/changeStatus/${_id}`, obj, config);
+
+                getPropForAdmins()
+
+                console.log(updatedData, 'changed');
+
+            }
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function changeStatusReject(_id) {
+
+        try {
+            if (AuthObject.role === 'admin') {
+
+                let obj = {
+                    reqStatus: 'rejected'
+                }
+                let updatedData = await axios.put(`${host}/changeStatus/${_id}`, obj, config);
+
+
+                getPropForAdmins()
+                console.log(updatedData, 'changed');
 
             }
 
@@ -86,8 +127,9 @@ const [renderData, setRenderData] = useState([])
     }
 
 
+
     return (
-        <Prop.Provider value={{ addProp, getPropForUsers, getPropForAdmins,renderData, setRenderData }}>
+        <Prop.Provider value={{ addProp, getPropForUsers, getPropForAdmins, renderData, setRenderData, changeStatusApprove, changeStatusReject,  }}>
             {props.children}
         </Prop.Provider>
     )

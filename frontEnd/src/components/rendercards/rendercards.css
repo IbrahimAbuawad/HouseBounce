@@ -6,3 +6,36 @@
     display: flex;
     justify-content: space-between;
 }
+
+.changeStatus{
+margin:10px 0
+}
+
+#apprbtn{
+    border:1px solid #6faa21;
+    background-color: white;
+    margin-right: 20px;
+    color: #6faa21;
+    padding: 5px 20px;
+    transition: all 0.2s ease-in-out;
+}
+
+#apprbtn:hover{
+    background-color:#6faa21;
+    color: white;
+}
+
+#rejectbtn{
+    border:1px solid rgb(179, 3, 3);
+    background-color: white;
+    margin-right: 20px;
+    color: rgb(179, 3, 3);
+    padding: 5px 20px;
+    transition: all 0.2s ease-in-out;
+}
+
+#rejectbtn:hover{
+    background-color:rgb(179, 3, 3);
+    color: white;
+}
+
