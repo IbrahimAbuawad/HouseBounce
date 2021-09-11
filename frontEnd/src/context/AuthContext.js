@@ -10,7 +10,10 @@ function AuthContext(props) {
     const [loggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState({})
     const [token, setToken] = useState(null);
-    const [role, setrRole] = useState(null)
+    const [role, setrRole] = useState(null);
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [userId, setUserId] = useState('')
 
     const history = useHistory();
     const { pathname } = useLocation();
@@ -46,17 +49,29 @@ function AuthContext(props) {
             setLoginState(false, null, user)
         }
     }
-    function setLoginState(loggedIn, token, user) {
+    async function setLoginState(loggedIn, token, user) {
         cookie.save('auth', token, { path: '/' });
         setToken(token);
         setUser({ user });
         setLoggedIn(loggedIn);
 
+        if (token) {
+            const all = await axios.get(`${host}/all`);
+            console.log(all, 'all');
+            let filteredUsers = all?.data?.filter(e => {
+                return (e.email === user.email);
+            })
+            setFirstName(filteredUsers[0]?.firstName)
+            setLastName(filteredUsers[0]?.lastName)
+            setrRole(filteredUsers[0]?.role)
+            setUserId(filteredUsers[0]?._id)
+
+        }
 
     }
 
     async function signIn(email, pass) {
-       
+
         const basic = {
             auth: {
                 username: email,
@@ -64,7 +79,7 @@ function AuthContext(props) {
             }
         }
         const all = await axios.get(`${host}/all`);
-        console.log(all,'all');
+        console.log(all, 'all');
         let filteredUsers = all?.data?.filter(e => {
             return (e.email === email);
         })
@@ -74,14 +89,21 @@ function AuthContext(props) {
                 if (filteredUsers[0]?.role === 'user') {
                     console.log('inside user');
                     setrRole('user')
-                    const data = await axios.post(`${host}/signin/user`,{}, basic)
+                  
+                    const data = await axios.post(`${host}/signin/user`, {}, basic)
+                    setFirstName(data.data.user.firstName)
+                    setLastName(data.data.user.lastName)
+                    setUserId(data.data.user._id)
                     validateToken(data.data.token)
                 }
                 else {
                     setrRole('admin')
                     console.log('inside admin');
-                    const data = await axios.post(`${host}/signin/admin`,{}, basic)
-                    console.log(data,'data');
+                    const data = await axios.post(`${host}/signin/admin`, {}, basic)
+                    console.log(data, 'data');
+                    setFirstName(data.data.user.firstName)
+                    setLastName(data.data.user.lastName)
+                    setUserId(data.data.user._id)
                     validateToken(data.data.token)
                 }
 
@@ -106,7 +128,7 @@ function AuthContext(props) {
 
         } catch (error) {
 
-                alert('Email is already exist');
+            alert('Email is already exist');
 
         }
     }
@@ -134,7 +156,7 @@ function AuthContext(props) {
     }
 
     return (
-        <Auth.Provider value={{ loggedIn, user, token, role, Config, host, signIn, userSignUp, adminSignUp, signOut }}>
+        <Auth.Provider value={{ loggedIn, user, token, role, Config, host, signIn, userSignUp, adminSignUp, signOut, firstName, setFirstName, lastName, setLastName,userId, setUserId }}>
             {props.children}
         </Auth.Provider>
     )
