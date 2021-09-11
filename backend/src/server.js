@@ -6,6 +6,7 @@ const app = express();
 const not404 = require('./error-handlers/404');
 const not500 = require('./error-handlers/500');
 const authRoutes = require('./auth/routes');
+const propertyRoute = require('./routes/property');
 
 
 app.use(cors())
@@ -17,6 +18,8 @@ app.use(authRoutes);
 app.get('/', (req, res) => {
     res.send('its work')
 })
+app.use(propertyRoute);
+
 
 app.use('*', not404);
 app.use(not500);
