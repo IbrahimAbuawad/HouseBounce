@@ -122,9 +122,10 @@ function AuthContext(props) {
             lastName: lName
         }
         try {
-            const data = await axios.post(`${host}/signup/user`, obj);
-            validateToken(data.data.token);
-            setrRole('user')
+             await axios.post(`${host}/signup/user`, obj);
+            history.push('/')
+            // validateToken(data.data.token);
+            // setrRole('user')
 
         } catch (error) {
 
@@ -141,9 +142,11 @@ function AuthContext(props) {
             lastName: lName
         }
         try {
-            const data = await axios.post(`${host}/signup/admin`, obj);
-            validateToken(data.data.token);
-            setrRole('admin')
+            await axios.post(`${host}/signup/admin`, obj);
+            history.push('/')
+            // validateToken(data.data.token);
+
+            // setrRole('admin')
 
         } catch (error) {
             alert('Email is already exist');

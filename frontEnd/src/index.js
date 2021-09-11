@@ -16,7 +16,6 @@ ReactDOM.render(
         <PropContext>
           <App />
         </PropContext>
-
       </AuthContext>
     </Router>
   </React.StrictMode>,
