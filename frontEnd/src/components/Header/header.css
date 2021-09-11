@@ -1,0 +1,85 @@
+#header {
+    font-family: 'Alumni Sans, sans-serif';
+    /* font-weight: bold; */
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    padding: 20px 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.274);
+
+
+}
+#header .leftSection {
+    flex-grow: 2;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    
+}
+
+
+#header .leftSection .leftheaderlinks {
+margin-left: 40px;
+transition: all 0.2s ease-in-out;
+text-decoration: none;
+padding-top:10px;
+color: rgba(5, 5, 5, 0.979);
+}
+
+
+#header .leftSection .leftheaderlinks:hover{
+    color: #8cc63f;
+}
+
+
+.leftheaderlinks:focus{
+    color: #8cc63f;
+}
+
+#header .rightSection {
+    flex-grow: 1;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+
+
+}
+
+#header .rightSection .signinheader {
+    margin-right: 30px;
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: all 0.2s ease-in-out;
+    color: rgba(5, 5, 5, 0.979);
+
+
+}
+#header .rightSection .signinheader:hover {
+color:  #8cc63f;
+}
+#header .rightSection #addproperty {
+     background-color: #44ac5a;
+     color: white;
+     padding: 10px 20px;
+     transition: all 0.2s ease-in-out;
+     border:none;
+     border-radius: 5px;
+     margin-right: 10px;
+}
+#header .rightSection #addproperty:hover{
+    background-color:  #44ac5bd7;
+    cursor: pointer;
+}
+
+#signoutbtn{
+    border: none;
+    background-color: white;
+    margin-right: 30px;
+    padding: 10px 20px;
+    transition: all 0.2s ease-in-out;
+
+}
+#signoutbtn:hover{
+color:rgb(194, 17, 17) ;
+}

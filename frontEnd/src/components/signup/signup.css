@@ -1,0 +1,37 @@
+.signinwrapper{
+    margin-top: 20px;
+}
+
+.signinsides{
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+#h1 h1{
+    margin-bottom: 20px;
+    color: rgba(0, 0, 0, 0.678);
+}
+#h1{
+  text-align: center;
+}
+
+.signinbtn{
+    border: 1px solid #8cc63f ;
+    background-color: white;
+    padding: 10px 20px;
+    color: #8cc63f;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+}
+
+.signinbtn:hover{
+    background-color: #8cc63f;
+    color: white;
+}
+
+
+.btn_role_wrapper{
+    display: flex;
+    justify-content: space-between;
+}
