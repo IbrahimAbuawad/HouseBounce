@@ -1,0 +1,12 @@
+.addPropWrapper{
+    
+    width: 500px;
+    margin: 20px auto;
+    box-shadow: 1px 2px 9px 2px #00000033;
+    padding: 20px 20px;
+    text-align: center;
+}
+
+textarea{
+    width: 100%;
+}

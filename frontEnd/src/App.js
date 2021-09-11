@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import NotFound from './components/NotFound';
 import Signup from './components/signup/Signup';
+import AddProp from './components/addprop/AddProp';
 
 
 function App() {
@@ -22,15 +23,15 @@ function App() {
       <Switch>
 
         <Route path='/s'>
-          <Home />
+          <Home logged={AuthObject.loggedIn} />
         </Route>
 
         <Route path='/signup'>
-          <Signup logged={AuthObject.loggedIn}/>
+          <Signup logged={AuthObject.loggedIn} />
         </Route>
 
         <Route path='/addproperty'>
-
+          <AddProp />
         </Route>
         <Route path='/signin'>
 

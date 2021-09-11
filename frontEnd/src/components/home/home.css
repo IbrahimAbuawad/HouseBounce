@@ -1,0 +1,13 @@
+.cardGroup{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    
+}
+
+.empty{
+    text-align: center;
+    margin-top: 100px;
+    color: rgba(0, 0, 0, 0.623);
+}
