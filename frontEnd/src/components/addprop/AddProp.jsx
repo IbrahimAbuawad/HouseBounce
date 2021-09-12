@@ -46,7 +46,6 @@ function AddProp({ logged }) {
     );
   }
 
-  console.log(propInfo,'propInfo');
   if (!logged) {
     return (
       <div class="addPropWrapper">
